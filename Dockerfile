@@ -36,9 +36,10 @@ RUN R -e 'install.packages(c("data.table", "stringr", "sybil", "getopt", "reshap
 RUN R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")'
 RUN R -e 'remotes::install_git("https://gitlab.cs.uni-duesseldorf.de/general/ccb/sybilSBML.git")'
 
-RUN cd /opt && git clone https://github.com/jotech/gapseq && chmod -R a+rw /opt/gapseq
+RUN cd /opt && git clone https://github.com/jotech/gapseq
 RUN cd /usr/bin && ln -s /opt/gapseq/gapseq
 RUN cd /opt/gapseq/ && src/./update_sequences.sh
+RUN chmod -R a+rw /opt/gapseq
 
 RUN rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/*
