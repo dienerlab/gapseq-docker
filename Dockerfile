@@ -34,7 +34,7 @@ ENV LANG en_US.UTF-8
 
 RUN R -e 'install.packages(c("data.table", "stringr", "sybil", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite", "remotes"))'
 RUN R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")'
-RUN R -e 'remotes::install_git("https://gitlab.cs.uni-duesseldorf.de/general/ccb/sybilSBML.git")'
+RUN R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybilSBML/sybilSBML_3.1.2.tar.gz")'
 
 RUN cd /opt && git clone https://github.com/jotech/gapseq
 RUN cd /usr/bin && ln -s /opt/gapseq/gapseq
