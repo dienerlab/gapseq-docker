@@ -23,7 +23,8 @@ RUN apt-get update \
         bc \
         curl \
         libsbml5-dev \
-        procps
+        procps \
+        libcurl4-openssl-dev
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_US.utf8 \
