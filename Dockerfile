@@ -33,8 +33,9 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-RUN R -e 'install.packages(c("data.table", "stringr", "sybil", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite", "remotes"))'
+RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite", "remotes"))'
 RUN R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")'
+RUN R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybil/sybil_2.2.0.tar.gz")'
 RUN R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybilSBML/sybilSBML_3.1.2.tar.gz")'
 
 RUN cd /opt && git clone https://github.com/jotech/gapseq
