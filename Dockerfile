@@ -43,7 +43,7 @@ RUN cd /usr/bin && ln -s /opt/gapseq/gapseq
 RUN cd /opt/gapseq/ && src/./update_sequences.sh
 RUN chmod -R a+rw /opt/gapseq
 
-RUN python3 -m pip install memote
+RUN python3 -m pip install memote --break-system-packages
 
 RUN rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/*
