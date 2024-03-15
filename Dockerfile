@@ -22,9 +22,9 @@ RUN apt-get update \
         barrnap \
         bc \
         curl \
-        libsbml5-dev \
         procps \
-        libcurl4-openssl-dev
+        libcurl4-openssl-dev \
+        parallel
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_US.utf8 \
