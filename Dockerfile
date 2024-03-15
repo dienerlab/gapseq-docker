@@ -1,4 +1,4 @@
-FROM debian:sid-slim
+FROM debian:12
 LABEL maintainer="Christian Diener <mail@cdiener.com>"
 
 RUN apt-get update \
@@ -24,6 +24,7 @@ RUN apt-get update \
         curl \
         procps \
         libcurl4-openssl-dev \
+        libsbmbl5-dev \
         parallel
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
