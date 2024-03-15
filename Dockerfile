@@ -24,7 +24,6 @@ RUN apt-get update \
         curl \
         procps \
         libcurl4-openssl-dev \
-        libsbml5-dev \
         parallel
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
@@ -34,17 +33,22 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite", "remotes"))'
-RUN R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")'
-RUN R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybil/sybil_2.2.0.tar.gz")'
-RUN R -e 'remotes::install_github("SysBioChalmers/sybil-SBML")'
+RUN wget https://sourceforge.net/projects/sbml/files/libsbml/5.18.0/stable/Linux/64-bit/libSBML-5.18.0-Linux-x64.deb && \
+    wget https://sourceforge.net/projects/sbml/files/libsbml/5.18.0/stable/R%20interface/libSBML_5.18.0.tar.gz && \
+    apt-get install ./libSBML-5.18.0-Linux-x64.deb && \
+    R CMD INSTALL libSBML_5.18.0.tar.gz
+
+RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite", "remotes"))' && \
+    R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")' && \
+    R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybil/sybil_2.2.0.tar.gz")' && \
+    R -e 'remotes::install_github("SysBioChalmers/sybil-SBML")'
 
 RUN cd /opt && git clone https://github.com/jotech/gapseq
 RUN cd /usr/bin && ln -s /opt/gapseq/gapseq
 RUN cd /opt/gapseq/ && src/./update_sequences.sh
 RUN chmod -R a+rw /opt/gapseq
 
-RUN python3 -m pip install memote --break-system-packages
+RUN python3 -m pip install memote micom --break-system-packages
 
 RUN rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/*
