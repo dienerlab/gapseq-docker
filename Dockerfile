@@ -46,7 +46,7 @@ RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "reshape2", "doP
     R -e 'remotes::install_url("https://cran.r-project.org/src/contrib/Archive/sybilSBML/sybilSBML_3.1.2.tar.gz")'
 
 RUN cd /opt && git clone https://github.com/jotech/gapseq && cd /usr/bin && ln -s /opt/gapseq/gapseq
-RUN cd /opt/gapseq/ && ./src/update_sequences.sh Bacteria && ./src/update_sequences.sh Archaea && \
+RUN cd /opt/gapseq/ && ./src/update_sequences.sh Bacteria && ./src/update_sequences.sh Archaea
 RUN chmod -R a+rw /opt/gapseq
 
 RUN python3 -m pip install memote micom --break-system-packages
