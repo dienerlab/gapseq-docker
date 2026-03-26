@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:stable
 LABEL maintainer="Christian Diener <mail@cdiener.com>"
 
 RUN apt-get update \
@@ -27,7 +27,9 @@ RUN apt-get update \
         parallel \
         libxml2-dev \
         libsbml5-dev \
-        bc
+        bc \
+        diamond-aligner \
+        mmseqs2
 
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
