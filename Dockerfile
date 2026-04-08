@@ -44,6 +44,8 @@ RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "R.utils", "stri
     R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")' && \
     R -e 'pak::pkg_install("Waschina/cobrar")'
 
+RUN python3 -m pip install pyrodigal
+
 RUN cd /opt && git clone https://github.com/jotech/gapseq && cd /usr/bin && ln -s /opt/gapseq/gapseq
 RUN cd /opt/gapseq/ && ./src/update_sequences.sh Bacteria && ./src/update_sequences.sh Archaea
 RUN chmod -R a+rw /opt/gapseq
