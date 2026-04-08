@@ -40,11 +40,6 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LD_LIBRARY_PATH /usr/lib64
 
-#RUN wget https://sourceforge.net/projects/sbml/files/libsbml/5.18.0/stable/Linux/64-bit/libSBML-5.18.0-Linux-x64.deb && \
-#    wget https://sourceforge.net/projects/sbml/files/libsbml/5.18.0/stable/R%20interface/libSBML_5.18.0.tar.gz && \
-#    apt-get install ./libSBML-5.18.0-Linux-x64.deb && \
-#    R CMD INSTALL libSBML_5.18.0.tar.gz
-
 RUN R -e 'install.packages(c("data.table", "stringr", "getopt", "R.utils", "stringi", "jsonlite", "httr", "pak"))' && \
     R -e 'install.packages("BiocManager"); BiocManager::install("Biostrings")' && \
     R -e 'pak::pkg_install("Waschina/cobrar")'
